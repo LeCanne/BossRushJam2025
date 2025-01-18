@@ -5,13 +5,27 @@ public abstract class Entity : MonoBehaviour
     protected int HP;
     protected int MaxHP;   
     protected float Speed;
+    protected bool grabbed;
+   
+    protected Vector3 offsetGrabbed;
+    private Entity grabber;
+
+    
+    public virtual void Update()
+    {
+        if (grabbed == true)
+        {
+            transform.position = grabber.transform.position + offsetGrabbed;
+            return;
+        }
+    }
     public virtual void InflictDamage(int damage, Entity entity)
     {
         entity.HP -= damage;
-        CheckHP();
+        CheckHP(entity);
     }
 
-    public virtual void CheckHP()
+    protected virtual void CheckHP(Entity entity)
     {
         if(HP <= 0)
         {
@@ -19,6 +33,20 @@ public abstract class Entity : MonoBehaviour
 
         }
     }
+
+    public virtual void Throw()
+    {
+
+    }
+
+    public virtual void GrabState(Entity Currentgrabber, bool grab)
+    {
+        grabber = Currentgrabber;
+        grabbed = grab;
+        
+       
+    }
+
 
     
 }
