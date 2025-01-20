@@ -6,18 +6,29 @@ public abstract class Entity : MonoBehaviour
     protected int MaxHP;   
     protected float Speed;
     protected bool grabbed;
+    protected Collider2D collisionBox;
    
-    protected Vector3 offsetGrabbed;
+    protected float offsetGrabbed;
     private Entity grabber;
 
     
+    public virtual void Start()
+    {
+        collisionBox = GetComponent<Collider2D>();
+    }
     public virtual void Update()
     {
         if (grabbed == true)
         {
-            transform.position = grabber.transform.position + offsetGrabbed;
+            transform.position = grabber.transform.position + grabber.transform.right * offsetGrabbed;
+            collisionBox.enabled = false;
             return;
         }
+        else
+        {
+            collisionBox.enabled = true;
+        }
+        
     }
     public virtual void InflictDamage(int damage, Entity entity)
     {

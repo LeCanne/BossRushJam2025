@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class Dummy : Entity
 {
-    
-    void Start()
+    public float offsetGrabbedDefault;
+    public override void Start()
     {
-        offsetGrabbed = new Vector3(1, 0,0);
+        base.Start();
+        offsetGrabbed = offsetGrabbedDefault;
     }
 
     

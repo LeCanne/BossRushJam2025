@@ -1,7 +1,10 @@
 using JetBrains.Annotations;
 using System.Collections;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : Entity
 {
@@ -30,8 +33,9 @@ public class PlayerController : Entity
     private Vector2 velocity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Start()
     {
+        base.Start();
         //Set basic values for entity
         HP = EntityMaxHP;
         MaxHP = EntityMaxHP;
@@ -96,7 +100,10 @@ public class PlayerController : Entity
     }
     void Movement()
     {
-       float maxSpeedChange =  acceleration * Time.fixedDeltaTime;
+        if (grab == true)
+            return;
+        
+        float maxSpeedChange =  acceleration * Time.fixedDeltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         velocity.y = Mathf.MoveTowards(velocity.y, desiredVelocity.y, maxSpeedChange);
         rb.linearVelocity = velocity;
@@ -120,6 +127,7 @@ public class PlayerController : Entity
     {
         
         grabbedEntity.GrabState(GetComponent<Entity>(), grab);
+        rb.linearVelocity = Vector2.zero;
     }
 
     void InterruptDash()
@@ -151,6 +159,7 @@ public class PlayerController : Entity
         {
             if(collision.gameObject.tag == "Enemy")
             {
+                RotateToward(collision.transform);
                 grabbedEntity = collision.gameObject.GetComponent<Entity>();
                 
                 grab = true;
@@ -158,5 +167,14 @@ public class PlayerController : Entity
             InterruptDash();
 
         }
+    }
+
+    public void RotateToward(Transform target)
+    {
+        Vector3 from = transform.right;
+        Vector3 to = target.position - transform.position;
+
+        float angle = Vector3.SignedAngle(from, to, transform.forward);
+        transform.Rotate(0.0f, 0.0f, angle);
     }
 }
