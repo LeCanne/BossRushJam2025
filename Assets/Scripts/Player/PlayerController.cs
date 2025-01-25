@@ -49,7 +49,7 @@ public class PlayerController : Entity
         HP = EntityMaxHP;
         MaxHP = EntityMaxHP;
         Speed = EntitySpeed;
-
+        rb2D = rb;
         //Set player controls
         MoveAction = InputSystem.actions.FindAction("Move");
         DashGrabAction = InputSystem.actions.FindAction("Attack"); 
@@ -76,6 +76,7 @@ public class PlayerController : Entity
     private void FixedUpdate()
     {
         velocity = rb.linearVelocity;
+        angularVelocity.z = rb.angularVelocity;
        
         if(Dash == true)
         {
@@ -124,10 +125,12 @@ public class PlayerController : Entity
             rb.freezeRotation = false;
             angularVelocity.z = Mathf.MoveTowards(angularVelocity.z, rotationSpeed, rotSpeedChange);
             rb.angularVelocity = angularVelocity.z;
-            grabbedEntity.transform.rotation = transform.rotation;  
+            grabbedEntity.transform.rotation = transform.rotation;
+            
             if (hold == false) 
             {
                 
+                Throw(grabbedEntity, angularVelocity.z / 10f);
                 UnGrab();
                 grab = false;
             }
@@ -195,7 +198,7 @@ public class PlayerController : Entity
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public override void OnCollisionEnter2D(Collision2D collision)
     {
         if(Dash == true)
         {

@@ -6,8 +6,10 @@ public abstract class Entity : MonoBehaviour
     protected int MaxHP;   
     protected float Speed;
     protected bool grabbed;
+    protected bool thrown;
    
     protected Collider2D collisionBox;
+    protected Rigidbody2D rb2D;
    
     protected float offsetGrabbed;
     private Entity grabber;
@@ -46,9 +48,10 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    public virtual void Throw()
+    public virtual void Throw(Entity grabbedEntity, float speed)
     {
-
+        grabbedEntity.rb2D.linearVelocity = grabbedEntity.transform.right * speed;
+        grabbedEntity.thrown = true;
     }
 
     public virtual void GrabState(Entity Currentgrabber, bool grab)
@@ -59,6 +62,20 @@ public abstract class Entity : MonoBehaviour
        
     }
 
+    public virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (grabbed == false && thrown == true) 
+        {
 
-    
+            Debug.Log("hit");
+
+                ContactPoint2D contact = collision.contacts[0];
+                Vector2 newDir = Vector2.zero;
+                var curDir = gameObject.transform.TransformDirection(Vector3.right);
+                newDir = Vector3.Reflect(curDir, contact.normal);
+                gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.right, newDir);
+            
+        }
+    }
+
 }
