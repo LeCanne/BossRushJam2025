@@ -6,6 +6,7 @@ public abstract class Entity : MonoBehaviour
     protected int MaxHP;   
     protected float Speed;
     protected bool grabbed;
+   
     protected Collider2D collisionBox;
    
     protected float offsetGrabbed;
