@@ -73,7 +73,7 @@ public class PlayerController : Entity
        
     }
 
-    private void FixedUpdate()
+    public override void FixedUpdate()
     {
         velocity = rb.linearVelocity;
         angularVelocity.z = rb.angularVelocity;
