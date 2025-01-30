@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b59286add82dacf419adb9b4895f443c
+guid: d6e1ac181b5aad540834ff45ab1185f4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9133102203987369909
-    second: Trashbag_shoulderLeft_0
+      213: -7999817202312715882
+    second: A_BSJ_Racoon_Walk_0005_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Trashbag_shoulderLeft_0
+      name: A_BSJ_Racoon_Walk_0005_0
       rect:
         serializedVersion: 2
-        x: 559
-        y: 588
-        width: 157
-        height: 78
+        x: 98
+        y: 44
+        width: 700
+        height: 413
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5bf1106b01c4fbe70800000000000000
-      internalID: 9133102203987369909
+      spriteID: 691671ca3a0faf090800000000000000
+      internalID: -7999817202312715882
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Trashbag_shoulderLeft_0: 9133102203987369909
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

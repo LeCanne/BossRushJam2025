@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Trashbag_armRight_0: -4475100586215262933
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
